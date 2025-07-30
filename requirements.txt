@@ -1,0 +1,76 @@
+# ============================================================================
+# TicketSnap - Dependencias de Producción
+# Desarrollado por Archive México (https://archive.com.mx/)
+# ============================================================================
+
+# ===== FRAMEWORK WEB =====
+fastapi==0.104.1                    # Framework web principal
+uvicorn[standard]==0.24.0           # Servidor ASGI con extras (watchfiles, etc.)
+gunicorn==21.2.0                    # Servidor WSGI para producción
+
+# ===== BASE DE DATOS =====
+SQLAlchemy==2.0.23                  # ORM principal
+alembic==1.12.1                     # Migraciones de base de datos
+psycopg2-binary==2.9.9              # Driver PostgreSQL
+aiosqlite==0.19.0                   # Driver SQLite asíncrono
+
+# ===== WHATSAPP INTEGRATION =====
+pywa==1.18.0                        # Cliente WhatsApp Cloud API
+httpx==0.25.2                       # Cliente HTTP asíncrono para APIs
+
+# ===== PROCESAMIENTO DE ARCHIVOS =====
+Pillow==10.1.0                      # Procesamiento de imágenes
+python-multipart==0.0.6             # Manejo de archivos multipart
+
+# ===== EXPORTACIÓN DE DATOS =====
+pandas==2.1.3                       # Manipulación de datos
+openpyxl==3.1.2                     # Exportación a Excel (.xlsx)
+xlsxwriter==3.1.9                   # Escritura avanzada de Excel
+
+# ===== CONFIGURACIÓN Y ENTORNO =====
+python-dotenv==1.0.0                # Manejo de variables de entorno
+pydantic==2.5.0                     # Validación de datos y configuración
+pydantic-settings==2.0.3            # Configuración con Pydantic
+
+# ===== UTILIDADES =====
+requests==2.31.0                    # Cliente HTTP síncrono
+python-dateutil==2.8.2              # Manipulación de fechas
+pytz==2023.3                        # Zonas horarias
+
+# ===== LOGGING Y MONITOREO =====
+structlog==23.2.0                   # Logging estructurado
+rich==13.7.0                        # Salida rica en consola
+
+# ===== VALIDACIÓN Y PARSING =====
+email-validator==2.1.0              # Validación de emails
+phonenumbers==8.13.26               # Validación de números telefónicos
+
+# ===== SEGURIDAD =====
+python-jose[cryptography]==3.3.0    # JWT y criptografía
+passlib[bcrypt]==1.7.4              # Hashing de contraseñas
+cryptography==41.0.7                # Funciones criptográficas
+
+# ===== DESARROLLO Y DEBUGGING =====
+# Estas dependencias también son útiles en producción para debugging
+python-json-logger==2.0.7           # JSON logging
+asyncio-mqtt==0.16.1                # Cliente MQTT asíncrono (opcional)
+
+# ===== VALIDACIÓN DE ESQUEMAS =====
+jsonschema==4.20.0                  # Validación de esquemas JSON
+marshmallow==3.20.1                 # Serialización/deserialización
+
+# ===== COMPRESIÓN Y ARCHIVOS =====
+aiofiles==23.2.1                    # Operaciones de archivo asíncronas
+zipfile36==0.1.3                    # Manejo de archivos ZIP
+
+# ===== INTERNACIONALIZACIÓN =====
+babel==2.13.1                       # Internacionalización y localización
+
+# ===== PERFORMANCE =====
+cachetools==5.3.2                   # Herramientas de cache
+redis==5.0.1                        # Cliente Redis (opcional)
+
+# ===== TESTING BÁSICO =====
+# Incluidas para verificaciones básicas en producción
+pytest==7.4.3                       # Framework de testing
+pytest-asyncio==0.21.1              # Testing asíncrono

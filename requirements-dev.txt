@@ -1,0 +1,79 @@
+# ============================================================================
+# TicketSnap - Dependencias de Desarrollo
+# Desarrollado por Archive México (https://archive.com.mx/)
+# ============================================================================
+
+# Incluir dependencias de producción
+-r requirements.txt
+
+# ===== TESTING =====
+pytest==7.4.3                       # Framework de testing principal
+pytest-asyncio==0.21.1              # Testing de código asíncrono
+pytest-cov==4.1.0                   # Cobertura de código
+pytest-mock==3.12.0                 # Mocking para tests
+pytest-xdist==3.3.1                 # Ejecución paralela de tests
+pytest-html==4.1.1                  # Reportes HTML de tests
+pytest-benchmark==4.0.0             # Benchmarking de performance
+httpx-mock==0.10.0                  # Mock para cliente HTTP
+
+# ===== LINTING Y FORMATEO =====
+black==23.11.0                      # Formateador de código
+flake8==6.1.0                       # Linter principal
+flake8-docstrings==1.7.0            # Validación de docstrings
+flake8-import-order==0.18.2         # Orden de imports
+flake8-bugbear==23.11.28            # Bugs y anti-patrones
+isort==5.12.0                       # Organización de imports
+autoflake==2.2.1                    # Eliminación de imports no usados
+
+# ===== TYPE CHECKING =====
+mypy==1.7.1                         # Type checker estático
+types-requests==2.31.0.10           # Tipos para requests
+types-python-dateutil==2.8.19.14    # Tipos para dateutil
+types-pytz==2023.3.1.1              # Tipos para pytz
+
+# ===== SEGURIDAD =====
+bandit==1.7.5                       # Análisis de seguridad
+safety==2.3.5                       # Verificación de vulnerabilidades
+semgrep==1.45.0                     # Análisis estático de seguridad
+
+# ===== DOCUMENTACIÓN =====
+sphinx==7.2.6                       # Generador de documentación
+sphinx-rtd-theme==1.3.0             # Tema Read the Docs
+sphinx-autodoc-typehints==1.25.2    # Type hints en documentación
+mkdocs==1.5.3                       # Documentación en Markdown
+mkdocs-material==9.4.8              # Tema Material para MkDocs
+
+# ===== PRE-COMMIT =====
+pre-commit==3.5.0                   # Hooks de pre-commit
+pre-commit-hooks==4.5.0             # Hooks estándar
+
+# ===== DESARROLLO =====
+ipython==8.17.2                     # Shell interactivo mejorado
+ipdb==0.13.13                       # Debugger mejorado
+jupyter==1.0.0                      # Notebooks (opcional)
+notebook==7.0.6                     # Jupyter Notebook
+
+# ===== PROFILING Y DEBUGGING =====
+memory-profiler==0.61.0             # Profiling de memoria
+line-profiler==4.1.1                # Profiling línea por línea
+py-spy==0.3.14                      # Profiler de producción
+snakeviz==2.2.0                     # Visualizador de profiles
+
+# ===== UTILIDADES DE DESARROLLO =====
+python-dotenv==1.0.0                # Variables de entorno (ya en prod)
+watchdog==3.0.0                     # File system monitoring
+faker==20.1.0                       # Generación de datos falsos
+factory-boy==3.3.0                  # Factories para testing
+freezegun==1.2.2                    # Mock de tiempo para tests
+
+# ===== API DEVELOPMENT =====
+httpie==3.2.2                       # Cliente HTTP CLI
+insomnia-cli==3.14.0                # Testing de APIs (opcional)
+
+# ===== DATABASE =====
+sqlite-utils==3.35.2                # Utilidades para SQLite
+pgcli==4.0.1                        # CLI mejorado para PostgreSQL
+
+# ===== MONITORING =====
+locust==2.17.0                      # Load testing
+artillery==1.7.9                    # Performance testing (opcional)
