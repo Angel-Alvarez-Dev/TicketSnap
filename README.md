@@ -1,5 +1,4 @@
-# TicketSnap
-
+````markdown
 <div align="center">
 
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
@@ -7,290 +6,200 @@
 [![WhatsApp](https://img.shields.io/badge/WhatsApp_Business-25D366?style=flat-square&logo=whatsapp&logoColor=white)](https://business.whatsapp.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 
-**Solución empresarial para la automatización de procesamiento de tickets y recibos mediante WhatsApp Business API**
-
-*Desarrollado por [Archive](https://archive.com.mx/)*
-
-[Características](#características) • 
-[Instalación](#instalación) • 
-[Configuración](#configuración) • 
-[Documentación](#documentación)
+**TicketSnap** • Solución empresarial para automatizar el procesamiento de recibos y facturas vía WhatsApp Business API
 
 </div>
 
 ---
 
-## Descripción
+## 📌 Índice
 
-TicketSnap es una solución empresarial desarrollada por **[Archive](https://archive.com.mx/)** que automatiza el procesamiento y análisis de tickets comerciales a través de WhatsApp Business API. La plataforma utiliza tecnología OCR avanzada para extraer datos estructurados de recibos, boletas y facturas, facilitando su integración con sistemas contables y de gestión empresarial.
-
-### Propuesta de Valor
-
-- **Automatización Completa**: Procesamiento sin intervención manual desde la captura hasta la exportación
-- **Integración Empresarial**: Compatible con sistemas ERP y plataformas contables existentes
-- **Escalabilidad**: Arquitectura diseñada para manejar alto volumen de transacciones
-- **Precisión**: OCR especializado en documentos comerciales con alta exactitud
-
----
-
-## Características
-
-### Funcionalidades Principales
-
-| Característica | Descripción |
-|---------------|-------------|
-| **Recepción Automatizada** | Procesamiento de imágenes vía WhatsApp Business API |
-| **OCR Empresarial** | Extracción de datos con Taggun Receipt OCR API |
-| **Base de Datos SQL** | Almacenamiento persistente con SQLAlchemy |
-| **Exportación Masiva** | Generación de reportes en CSV, Excel y formatos personalizados |
-| **API REST** | Endpoints para integración con sistemas terceros |
-| **Monitoreo** | Logging y métricas de performance integradas |
-
-### Tecnologías
-
-- **Backend**: FastAPI + Python 3.10+
-- **Base de Datos**: SQLite/PostgreSQL con SQLAlchemy ORM
-- **OCR**: Taggun Receipt API
-- **Mensajería**: PyWa (WhatsApp Cloud API Client)
-- **CI/CD**: GitHub Actions
-- **Monitoreo**: Logging estructurado y métricas
+- [Descripción](#descripción)
+- [Características principales](#características-principales)
+- [Instalación](#instalación)
+- [Configuración](#configuración)
+- [Uso](#uso)
+- [Ejemplo de solicitud](#ejemplo-de-solicitud)
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Desarrollo y pruebas](#desarrollo-y-pruebas)
+- [Despliegue](#despliegue)
+- [Monitoreo y mantenimiento](#monitoreo-y-mantenimiento)
+- [Contribuciones](#contribuciones)
+- [Licencia](#licencia)
+- [Contacto y soporte](#contacto-y-soporte)
 
 ---
 
-## Instalación
+## 📝 Descripción
 
-### Requisitos del Sistema
+TicketSnap es una plataforma desarrollada por **Archive México** para automatizar el flujo completo de captura, reconocimiento y análisis de tickets, boletas y facturas comerciales a través de la **WhatsApp Business API**. Utiliza OCR de alta precisión para extraer los datos necesarios y los integra directamente con sistemas ERP o contables.
 
-- Python 3.10 o superior
-- Sistema operativo: Linux/macOS/Windows con WSL2
-- Memoria RAM: 2GB mínimo, 4GB recomendado
-- Espacio en disco: 1GB para instalación base
+**Propuesta de valor**:
+- **Automatización total**: desde la recepción de la imagen hasta el reporte final.
+- **Integración empresarial**: endpoints REST fáciles de consumir.
+- **Escalabilidad**: arquitectura basada en FastAPI y bases de datos SQL.
+- **Precisión OCR**: extracción confiable con la Taggun Receipt OCR API.
 
-### Configuración del Entorno
+---
 
-#### Linux/macOS
+## 🚀 Características principales
+
+| Característica             | Descripción                                                                 |
+|----------------------------|-----------------------------------------------------------------------------|
+| 📲 Recepción vía WhatsApp   | Imágenes recibidas y procesadas automáticamente mediante webhook.           |
+| 🔍 OCR empresarial         | Extracción de datos clave (importe, fecha, establecimientos, artículos, etc.).|
+| 💾 Almacenamiento SQL      | Persistencia con SQLite o PostgreSQL usando SQLAlchemy ORM.                 |
+| 📊 Exportación múltiple    | Reportes en CSV, Excel y formatos personalizados.                            |
+| 🔧 API REST                | Documentada con Swagger UI y OpenAPI.                                        |
+| 📈 Monitoreo y métricas    | Logging estructurado y métricas de rendimiento integradas.                  |
+
+---
+
+## ⚙️ Instalación
+
+### Requisitos
+
+- Python 3.10+
+- Linux/macOS/Windows (se recomienda WSL2 en Windows)
+- 2 GB RAM (4 GB recomendado)
+- 1 GB de espacio libre
+
+### Pasos
 
 ```bash
-# Clonar repositorio
+# 1. Clonar repositorio
 git clone https://github.com/archive-mx/ticket-snap.git
 cd ticket-snap
 
-# Crear entorno virtual
+# 2. Crear entorno virtual e instalar dependencias
 python3 -m venv venv
-source venv/bin/activate
-
-# Instalar dependencias
+source venv/bin/activate  # Windows: venv\\Scripts\\activate
+pip install --upgrade pip
 pip install -r requirements.txt
-```
 
-#### Windows (WSL2)
-
-```bash
-# Instalar WSL2 y Ubuntu
-wsl --install -d Ubuntu
-
-# Actualizar sistema
-sudo apt update && sudo apt upgrade -y
-sudo apt install -y python3 python3-venv python3-pip
-
-# Seguir pasos de Linux/macOS
-```
-
-### Inicialización
-
-```bash
-# Configurar variables de entorno
+# 3. Inicializar base de datos
 cp .env.example .env
-# Editar .env con credenciales correspondientes
-
-# Inicializar base de datos
+# Edita .env con tus credenciales
 python -m src.db.init_db
 
-# Iniciar servidor
-uvicorn src.api.main:app --host 0.0.0.0 --port 8000
-```
+# 4. Ejecutar servidor local
+uvicorn src.api.main:app --host 0.0.0.0 --port 8000 --reload
+````
 
 ---
 
-## Configuración
+## 🔧 Configuración
 
-### Variables de Entorno
-
-Configure las siguientes variables en el archivo `.env`:
+Edita el archivo `.env` con las siguientes variables:
 
 ```ini
-# Configuración de OCR
-TAGGUN_API_KEY=your_taggun_api_key
+# Taggun OCR API
+taggun_api_key=TU_TAGGUN_API_KEY
 
-# Base de Datos
-DATABASE_URL=sqlite:///./tickets.db
-# Para producción: postgresql://user:password@host:port/database
+# Base de datos
+database_url=sqlite:///./tickets.db  # Para producción usa postgresql://usuario:pass@host:puerto/db
 
 # WhatsApp Business API
-WHATSAPP_TOKEN=your_whatsapp_business_token
-WHATSAPP_PHONE_ID=your_phone_number_id
-WHATSAPP_VERIFY_TOKEN=your_webhook_verify_token
+token_whatsapp=TU_WHATSAPP_BUSINESS_TOKEN
+phone_id=TU_WHATSAPP_PHONE_ID
+verify_token=TU_WHATSAPP_VERIFY_TOKEN
 
-# Configuración de Aplicación
-DEBUG=false
-LOG_LEVEL=INFO
-MAX_FILE_SIZE=10485760
-ALLOWED_FILE_TYPES=jpg,jpeg,png,pdf
-```
-
-### Obtención de Credenciales
-
-#### WhatsApp Business API
-
-1. Acceder a [Meta for Developers](https://developers.facebook.com/)
-2. Crear aplicación empresarial
-3. Configurar WhatsApp Business API
-4. Obtener tokens de acceso y configurar webhooks
-
-#### Taggun OCR API
-
-1. Registrarse en [Taggun](https://www.taggun.io/)
-2. Verificar cuenta empresarial
-3. Obtener API Key desde el panel de administración
-4. Configurar límites y facturación según necesidades
-
----
-
-## Uso
-
-### Operación Básica
-
-1. **Envío de Ticket**: Usuario envía imagen de ticket al número de WhatsApp configurado
-2. **Procesamiento**: Sistema procesa imagen con OCR y extrae datos estructurados
-3. **Almacenamiento**: Datos se guardan en base de datos con timestamp y metadatos
-4. **Respuesta**: Usuario recibe confirmación con datos extraídos y enlace de descarga
-
-### Comandos Disponibles
-
-| Comando | Función | Sintaxis |
-|---------|---------|----------|
-| Imagen + Texto | Procesar ticket | Enviar imagen con descripción opcional |
-| `/export` | Exportar registros | `/export [csv\|excel] [fecha_inicio] [fecha_fin]` |
-| `/status` | Estado del sistema | `/status` |
-| `/help` | Ayuda | `/help` |
-
-### Formato de Respuesta
-
-```
-✓ Ticket procesado exitosamente
-
-INFORMACIÓN EXTRAÍDA:
-• Establecimiento: Restaurante El Buen Sabor
-• Fecha: 2024-01-15 14:30:00
-• Folio: ABC123456
-• Total: $1,250.00 MXN
-• Artículos: 3 items procesados
-
-DESGLOSE:
-- Subtotal: $1,086.21
-- IVA (16%): $173.79
-- Total: $1,250.00
-
-Los datos han sido guardados en el sistema.
-Archivo de exportación disponible en: [enlace]
+# Opciones de la aplicación
+debug=false
+log_level=INFO
+max_file_size=10485760  # 10 MB
+types_allowed=jpg,jpeg,png,pdf
 ```
 
 ---
 
-## Arquitectura del Sistema
+## ▶️ Uso
 
-### Estructura del Proyecto
+1. **Enviar ticket**: el usuario envía una imagen al número de WhatsApp.
+2. **Procesamiento**: OCR extrae datos y genera un registro.
+3. **Almacenamiento**: datos guardados con metadatos y timestamp.
+4. **Respuesta**: confirmación con resumen y enlace de descarga.
+
+### 📋 Comandos disponibles
+
+| Comando       | Función            | Ejemplo                                |
+| ------------- | ------------------ | -------------------------------------- |
+| Imagen/ticket | Procesar ticket    | Enviar imagen con descripción opcional |
+| `/export`     | Exportar registros | `/export csv 2025-01-01 2025-07-30`    |
+| `/status`     | Estado del sistema | `/status`                              |
+| `/help`       | Mostrar ayuda      | `/help`                                |
+
+---
+
+## 💻 Ejemplo de solicitud
+
+```bash
+curl -X POST https://tu-dominio.com/webhook/whatsapp \
+  -H "Content-Type: application/json" \
+  -d '{
+    "entry": [{
+      "changes": [{
+        "value": {
+          "messages": [{
+            "type": "image",
+            "image": {"id": "MEDIA_ID"},
+            "from": "521xxxxxxxxxx"
+          }]
+        }
+      }]
+    }]
+  }'
+```
+
+---
+
+## 🗂️ Estructura del proyecto
 
 ```
 ticket-snap/
-├── .env.example              # Plantilla de configuración
-├── README.md                 # Documentación principal
-├── requirements.txt          # Dependencias Python
-├── .gitignore               # Exclusiones de Git
-├── .github/
+├── .env.example        # Plantilla de variables de entorno
+├── README.md           # Documentación principal
+├── requirements.txt    # Dependencias de Python
+├── .github/            # Configuración de CI/CD
 │   └── workflows/
-│       └── ci.yml           # Pipeline de integración continua
-├── src/                     # Código fuente
-│   ├── api/
-│   │   └── main.py          # Aplicación FastAPI principal
-│   ├── bot/
-│   │   ├── __init__.py
-│   │   └── handler.py       # Manejo de mensajes WhatsApp
-│   ├── core/
-│   │   ├── ocr.py           # Cliente OCR Taggun
-│   │   └── parser.py        # Procesamiento de datos
-│   ├── db/
-│   │   ├── models.py        # Modelos de base de datos
-│   │   └── session.py       # Gestión de conexiones
-│   └── utils/
-│       └── exporter.py      # Funciones de exportación
-├── tests/
-│   ├── unit/               # Pruebas unitarias
-│   └── integration/        # Pruebas de integración
-└── docs/                   # Documentación técnica
-    ├── api.md              # Especificación API
-    └── deployment.md       # Guía de despliegue
+│       └── ci.yml
+├── src/
+│   ├── api/            # FastAPI endpoints
+│   ├── bot/            # Lógica de mensajería WhatsApp
+│   ├── core/           # Cliente OCR y parser de datos
+│   ├── db/             # Modelos y sesión SQLAlchemy
+│   └── utils/          # Exportadores y utilidades
+├── tests/              # Pruebas unitarias e integración
+└── docs/               # Documentación técnica adicional
 ```
-
-### Flujo de Procesamiento
-
-1. **Recepción**: Webhook recibe mensaje de WhatsApp
-2. **Validación**: Verificación de formato y tamaño de archivo
-3. **OCR**: Procesamiento con Taggun API
-4. **Parseo**: Estructuración de datos extraídos
-5. **Persistencia**: Almacenamiento en base de datos
-6. **Exportación**: Generación de archivos de salida
-7. **Respuesta**: Envío de confirmación al usuario
 
 ---
 
-## Desarrollo y Pruebas
-
-### Entorno de Desarrollo
+## 🧪 Desarrollo y pruebas
 
 ```bash
-# Instalar dependencias de desarrollo
+# Instalar deps de desarrollo
 pip install -r requirements-dev.txt
 
-# Configurar pre-commit hooks
-pre-commit install
-
-# Ejecutar tests
+# Ejecutar pruebas
 pytest --cov=src --cov-report=html
 
-# Linting y formateo
-black src/
-flake8 src/
-mypy src/
+# Formateo y linting
+black src/ && flake8 src/ && mypy src/
 ```
-
-### Estándares de Calidad
-
-- **Cobertura de Código**: Mínimo 85%
-- **Linting**: Cumplimiento con PEP 8 via flake8
-- **Type Hints**: Tipado estático con mypy
-- **Seguridad**: Análisis con bandit
-- **Documentación**: Docstrings en formato Google
 
 ---
 
-## Despliegue en Producción
+## 🚢 Despliegue
 
-### Docker
+### 📦 Docker
 
 ```bash
-# Construir imagen
 docker build -t archive-mx/ticket-snap:latest .
-
-# Ejecutar contenedor
-docker run -d \
-  --name ticket-snap \
-  -p 8000:8000 \
-  --env-file .env \
-  archive-mx/ticket-snap:latest
+docker run -d --name ticket-snap -p 8000:8000 --env-file .env archive-mx/ticket-snap:latest
 ```
 
-### Docker Compose
+### 🐳 Docker Compose
 
 ```yaml
 version: '3.8'
@@ -299,11 +208,10 @@ services:
     build: .
     ports:
       - "8000:8000"
-    env_file:
-      - .env
+    env_file: .env
     depends_on:
       - postgres
-  
+
   postgres:
     image: postgres:14
     environment:
@@ -311,81 +219,48 @@ services:
       POSTGRES_USER: ticketsnap
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - data:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
-```
-
-### Configuración de Webhook
-
-Configurar el webhook de WhatsApp para apuntar a:
-```
-https://your-domain.com/webhook/whatsapp
-```
-
-Con método POST para recepción de mensajes y GET para verificación.
-
----
-
-## Monitoreo y Mantenimiento
-
-### Logging
-
-El sistema implementa logging estructurado con los siguientes niveles:
-- `INFO`: Operaciones normales
-- `WARNING`: Situaciones que requieren atención
-- `ERROR`: Errores que no impiden la operación
-- `CRITICAL`: Errores que requieren intervención inmediata
-
-### Métricas
-
-- Tiempo de procesamiento por ticket
-- Tasa de éxito de OCR
-- Volumen de mensajes procesados
-- Errores por tipo y frecuencia
-
----
-
-## Soporte y Mantenimiento
-
-### Soporte Técnico
-
-Para soporte técnico, contactar a:
-- **Email**: info@archive.com.mx
-- **Sitio Web**: [archive.com.mx](https://archive.com.mx/)
-- **Documentación**: [docs.archive.com.mx/ticket-snap](https://docs.archive.com.mx/ticket-snap)
-- **Portal de Soporte**: [support.archive.com.mx](https://support.archive.com.mx)
-
-### Actualizaciones
-
-Las actualizaciones se distribuyen siguiendo versionado semántico:
-- **Major**: Cambios incompatibles hacia atrás
-- **Minor**: Nueva funcionalidad compatible
-- **Patch**: Correcciones de bugs
-
----
-
-## Licencia
-
-Este proyecto está licenciado bajo los términos de la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
-
-```
-Copyright (c) 2024 Archive México
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software...
+  data:
 ```
 
 ---
+
+## 📊 Monitoreo y mantenimiento
+
+* **Logging**: niveles INFO, WARNING, ERROR y CRITICAL.
+* **Métricas**: tiempo de procesamiento, tasa de éxito OCR, volumen de mensajes.
+* **Alertas**: se integran con sistemas externos (opcional).
+
+---
+
+## 🤝 Contribuciones
+
+¡Contribuciones bienvenidas! Sigue estos pasos:
+
+1. Haz fork del repositorio.
+2. Crea una rama con tu feature/bugfix: `git checkout -b feature/nueva-funcionalidad`.
+3. Realiza tus cambios y pruebas.
+4. Envía un pull request describiendo tu aporte.
+
+---
+
+## 📜 Licencia
+
+Licenciado bajo MIT. Ver [LICENSE](LICENSE) para más detalles.
+
+---
+
+## 📬 Contacto y soporte
+
+Para dudas y soporte:
+
+* Email: [info@archive.com.mx](mailto:info@archive.com.mx)
+* Documentación: [https://docs.archive.com.mx/ticket-snap](https://docs.archive.com.mx/ticket-snap)
+* Soporte: [https://support.archive.com.mx](https://support.archive.com.mx)
 
 <div align="center">
-
-**TicketSnap** - Desarrollado por **[Archive México](https://archive.com.mx/)**
-
-*Automatización empresarial inteligente*
-
+**TicketSnap** - Automatización empresarial inteligente
 </div>
+```
