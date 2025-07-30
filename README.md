@@ -1,4 +1,4 @@
-````markdown
+
 <div align="center">
 
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
@@ -263,4 +263,3 @@ Para dudas y soporte:
 <div align="center">
 **TicketSnap** - Automatización empresarial inteligente
 </div>
-```
